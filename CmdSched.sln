@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CmdSched", "CmdSched\CmdSched.vcxproj", "{66A6C876-371E-42BF-BECB-3BC4CE5E201B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66A6C876-371E-42BF-BECB-3BC4CE5E201B}.Debug|x64.ActiveCfg = Debug|x64
+		{66A6C876-371E-42BF-BECB-3BC4CE5E201B}.Debug|x64.Build.0 = Debug|x64
+		{66A6C876-371E-42BF-BECB-3BC4CE5E201B}.Release|x64.ActiveCfg = Release|x64
+		{66A6C876-371E-42BF-BECB-3BC4CE5E201B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D7C7B70-791A-4D6A-9DA3-C826CBFF0B86}
+	EndGlobalSection
+EndGlobal
