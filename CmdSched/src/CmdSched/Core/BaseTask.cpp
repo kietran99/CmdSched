@@ -12,28 +12,23 @@ namespace CmdSched::Core
 	BaseTask::BaseTask(const BaseTask& other)
 		: name(other.name), time(other.time)
 	{
-		std::cout << "Copying Task...\n";
+		//std::cout << "Copying Task...\n";
 	}
 
 	BaseTask::BaseTask(BaseTask&& other) noexcept
 		: name(other.name), time(std::move(other.time))
 	{
-		std::cout << "Moving Task " << name << "...\n";
+		//std::cout << "Moving Task " << name << "...\n";
 	}
 
 	BaseTask::~BaseTask()
 	{
-		std::cout << "Destroying Task " << name << "...\n";
+		//std::cout << "Destroying Task " << name << "...\n";
 	}
 	
 	std::ostream& operator<<(std::ostream& os, const BaseTask& task)
-	{
-		//os << "o---------------------TASK DATA---------------------o\n";
-		
+	{		
 		os << '[' << task.time << ']' << ' ' << task.name;
-
-		//os << "o---------------------------------------------------o\n";
-
 		return os;
 	}
 }

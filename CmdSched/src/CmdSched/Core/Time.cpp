@@ -6,24 +6,24 @@ namespace CmdSched::Core
 	Time::Time(int hour, int min, int sec, int day, int month, int year)
 		: hour(hour), min(min), sec(sec), day(day), month(month), year(year)
 	{
-		std::cout << "Constucting Time...\n";
+		//std::cout << "Constucting Time...\n";
 	}
 
 	Time::Time(const Time& other)
 		: hour(other.hour), min(other.min), sec(other.sec), day(other.day), month(other.month), year(other.year)
 	{
-		printf("Copying Time...\n");
+		//printf("Copying Time...\n");
 	}
 
 	Time::Time(Time&& other) noexcept
 		: hour(other.hour), min(other.min), sec(other.sec), day(other.day), month(other.month), year(other.year)
 	{
-		printf("Moving Time...\n");
+		//printf("Moving Time...\n");
 	}
 	
 	Time::~Time()
 	{
-		std::cout << "Destroying Time...\n";
+		//std::cout << "Destroying Time...\n";
 	}
 	
 	std::ostream& operator<<(std::ostream& os, const Time& time)

@@ -1,6 +1,9 @@
 #include "cspch.h"
 #include "BaseTask.h"
 #include "BaseSchedule.h"
+#include "CommandMux.h"
+#include <sstream>
+
 using namespace CmdSched;
 
 class B
@@ -93,26 +96,72 @@ private:
 	std::vector<B> vect;
 };
 
-std::vector<Core::BaseTask> CreateTestTasks()
+class Application
 {
-	std::vector<Core::BaseTask> res;
-	res.push_back(Core::BaseTask("Test 0", { 1, 29, 58, 12, 5, 2020 }));
-	res.push_back(Core::BaseTask("Test 1", {10, 44, 23, 12, 6, 2020}));
-	res.push_back(Core::BaseTask("Test 2", {23, 23, 14, 12, 6, 2020}));
-	return res;
-}
+public:
+	Application()
+		//: cmdMux (Commands::CommandMux(&schedule))
+	{		
+		Start();
+		Update();
+	}
 
-int main()
-{		
+	void Start()
 	{
-		Core::BaseSchedule schedule;
 		std::vector<Core::BaseTask> tasks = CreateTestTasks();
 		for (int i = 0; i < tasks.size(); i++)
 		{
 			schedule.AddTask(std::move(tasks[i]));
 		}
-		std::cout << schedule << std::endl;
+		
+		schedule.ShowAllTasks();		
 	}
+
+	void Update()
+	{
+		std::string input;
+
+		while (true)
+		{
+			std::cout << "Enter a command: ";
+			std::cin >> input;
+
+			if (input == "a")
+			{
+				schedule.AddTask(Core::BaseTask("Test 0", { 1, 29, 58, 12, 5, 2020 }));
+				schedule.ShowAllTasks();
+			}
+		}
+	}
+private:
+	std::vector<Core::BaseTask> CreateTestTasks()
+	{
+		std::vector<Core::BaseTask> res;
+		res.push_back(Core::BaseTask("Test 0", { 1, 29, 58, 12, 5, 2020 }));
+		res.push_back(Core::BaseTask("Test 1", { 10, 44, 23, 12, 6, 2020 }));
+		res.push_back(Core::BaseTask("Test 2", { 23, 23, 14, 12, 6, 2020 }));
+		return res;
+	}
+
+private:
+	Core::BaseSchedule schedule;
+	//Commands::CommandMux cmdMux;
+};
+
+void foo(std::stringstream& ss)
+{
+	std::string res;
+	for (int i = 0; i < 2; i++)
+	{
+		ss >> res;
+	}
+}
+
+int main()
+{
+	//Application app;
+	Commands::CommandMux cmdMux{&Core::BaseSchedule()};
+	cmdMux.RequestCommand();
 	
 	std::cin.get();
 }

@@ -62,7 +62,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>src;src\CmdSched\Core;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,7 +82,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>src;src\CmdSched\Core;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,6 +94,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CmdSched\Commands\NoCommand.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\CommandMux.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\AddTaskCommand.cpp" />
     <ClCompile Include="src\cspch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
@@ -105,13 +108,17 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Main.cpp">
+    <ClCompile Include="src\Application.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\CmdSched\Core\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CmdSched\Commands\NoCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\CommandMux.h" />
+    <ClInclude Include="src\CmdSched\Commands\AddTaskCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\BaseCommand.h" />
     <ClInclude Include="src\cspch.h" />
     <ClInclude Include="src\CmdSched\Core\BaseSchedule.h" />
     <ClInclude Include="src\CmdSched\Core\BaseTask.h" />

@@ -30,6 +30,7 @@ namespace CmdSched::Core
 
 	BaseSchedule::~BaseSchedule()
 	{
+		printf("Destroying Schedule...\n");
 		/*for (size_t i = 0, len = tasks.size(); i < len; i++)
 		{
 			delete tasks[i];
@@ -39,6 +40,7 @@ namespace CmdSched::Core
 
 	bool BaseSchedule::AddTask(BaseTask&& task)
 	{
+		//printf("Add Task\n");
 		tasks.push_back(std::move(task));
 		return true;
 	}
@@ -46,12 +48,12 @@ namespace CmdSched::Core
 	/*void ShowTaskInfo(const BaseTask& task)
 	{
 		std::cout << task << std::endl;
-	}*/
+	}*/	
 
 	void BaseSchedule::ShowAllTasks()
 	{
-		std::cout << this << std::endl;
-	}	
+		std::cout << *this;
+	}
 
 	void BaseSchedule::FilterTasks()
 	{
