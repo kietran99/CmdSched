@@ -3,6 +3,7 @@
 #include "BaseSchedule.h"
 #include "CommandMux.h"
 #include <sstream>
+#include "fp.h"
 
 using namespace CmdSched;
 
@@ -154,5 +155,5 @@ int main()
 	Commands::CommandMux cmdMux{&Core::BaseSchedule()};
 	cmdMux.RequestCommand();
 	
-	std::cin.get();
+	//std::cin.get();
 }
