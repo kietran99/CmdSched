@@ -11,17 +11,10 @@ namespace CmdSched::Commands
 	{
 		printf("Constructing Command Mux\n");
 
-		cmdDict = 
-		{
-			{"add task", new AddTaskCommand()}
-		};
+		InitializeAllCommands();
 		
 		std::cout << "Available Commands: " << std::endl;
-		for (auto& kv : cmdDict)
-		{
-			std::cout << kv.first << std::endl;
-		}
-
+		for (auto& kv : cmdDict) { std::cout << kv.first << std::endl; }
 		std::cout << std::endl;
 	}
 
@@ -34,20 +27,22 @@ namespace CmdSched::Commands
 		}
 	}
 
+	void CommandMux::InitializeAllCommands()
+	{
+		printf("Initializing All Commands...\n");
+
+		cmdDict =
+		{
+			{"add task", new AddTaskCommand()}
+		};
+	}
+
 	void CommandMux::RequestCommand()
 	{
 		std::cout << "Input command: ";				
 		std::stringstream input = GetInput();
-		BaseCommand*& cmd = ExtractCommand(input);
-		std::vector<std::string> args = ExtractArgs(input);
-
-		if (args.size() != cmd->GetArgsCount())
-		{
-			printf("The number of arguments does not match\n");
-			return;
-		}
-
-		cmd->Execute(schedule, args);
+		BaseCommand*& cmd = ExtractCommand(input);	
+		cmd->Resolve(schedule, ExtractArgs(input));
 	}
 
 	std::stringstream CommandMux::GetInput()
@@ -104,9 +99,4 @@ namespace CmdSched::Commands
 
 		return args;
 	}
-
-	/*void CommandMux::ExecuteCommand(const std::vector<std::string>& args)
-	{
-		std::cout << "Executing Command...\n";	
-	}*/
 }

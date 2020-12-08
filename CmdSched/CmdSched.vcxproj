@@ -112,7 +112,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\CmdSched\Core\Time.cpp" />
+    <ClCompile Include="src\CmdSched\Core\DateTime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CmdSched\Commands\NoCommand.h" />
@@ -122,7 +122,7 @@
     <ClInclude Include="src\cspch.h" />
     <ClInclude Include="src\CmdSched\Core\BaseSchedule.h" />
     <ClInclude Include="src\CmdSched\Core\BaseTask.h" />
-    <ClInclude Include="src\CmdSched\Core\Time.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

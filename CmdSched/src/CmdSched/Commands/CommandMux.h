@@ -13,9 +13,9 @@ namespace CmdSched::Commands
 		~CommandMux();
 				
 		void RequestCommand();
-		//void ExecuteCommand(const std::vector<std::string>& args);
 
 	private:
+		void InitializeAllCommands();
 		std::stringstream GetInput();
 		BaseCommand*& ExtractCommand(std::stringstream& ss);
 		std::vector<std::string> ExtractArgs(std::stringstream& ss);

@@ -128,7 +128,7 @@ public:
 
 			if (input == "a")
 			{
-				schedule.AddTask(Core::BaseTask("Test 0", { 1, 29, 58, 12, 5, 2020 }));
+				schedule.AddTask(Core::BaseTask("Test 0", { 29, 1, 12, 5, 2020 }));
 				schedule.ShowAllTasks();
 			}
 		}
@@ -137,9 +137,9 @@ private:
 	std::vector<Core::BaseTask> CreateTestTasks()
 	{
 		std::vector<Core::BaseTask> res;
-		res.push_back(Core::BaseTask("Test 0", { 1, 29, 58, 12, 5, 2020 }));
-		res.push_back(Core::BaseTask("Test 1", { 10, 44, 23, 12, 6, 2020 }));
-		res.push_back(Core::BaseTask("Test 2", { 23, 23, 14, 12, 6, 2020 }));
+		res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
+		res.push_back(Core::BaseTask("Test 1", { 23, 44, 6, 12, 2020 }));
+		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));
 		return res;
 	}
 
@@ -147,15 +147,6 @@ private:
 	Core::BaseSchedule schedule;
 	//Commands::CommandMux cmdMux;
 };
-
-void foo(std::stringstream& ss)
-{
-	std::string res;
-	for (int i = 0; i < 2; i++)
-	{
-		ss >> res;
-	}
-}
 
 int main()
 {
