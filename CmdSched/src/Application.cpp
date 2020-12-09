@@ -2,8 +2,6 @@
 #include "BaseTask.h"
 #include "BaseSchedule.h"
 #include "CommandMux.h"
-#include <sstream>
-#include "fp.h"
 
 using namespace CmdSched;
 
@@ -152,7 +150,8 @@ private:
 int main()
 {
 	//Application app;
-	Commands::CommandMux cmdMux{&Core::BaseSchedule()};
+	Core::BaseSchedule sched;
+	Commands::CommandMux cmdMux{&sched};
 	cmdMux.RequestCommand();
 	
 	//std::cin.get();

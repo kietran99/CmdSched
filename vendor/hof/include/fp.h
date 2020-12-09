@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <variant>
 
 namespace Functional
 {
@@ -67,27 +68,27 @@ namespace Functional
 		{
 		public:
 			Either(const TL& left)
-				: left(left), isLeft(true) {}
+				: maybe(left) {}
 
 			Either(const TR& right)
-				: right(right), isLeft(false) {}
+				: maybe(right) {}
 
 			Either& operator=(const Either& other) = delete;
 
 			void Match(void leftHandler(TL), void rightHandler(TR)) 
 			{
-				isLeft ? leftHandler(left) : rightHandler(right);
+				std::get_if<TL>(&maybe) ? 
+					leftHandler(std::get<TL>(maybe)) : rightHandler(std::get<TR>(maybe));
 			}
 
 			template<class T>
 			T Match(T leftHandler(TL), T rightHandler(TR))
 			{
-				return isLeft ? leftHandler(left) : rightHandler(right);
+				return std::get_if<TL>(&maybe) ?
+					leftHandler(std::get<TL>(maybe)) : rightHandler(std::get<TR>(maybe));
 			}
 		private:
-			TL left;
-			TR right;
-			bool isLeft;
+			std::variant<TL, TR> maybe;
 		};
 	}
 }
