@@ -6,3 +6,5 @@
 #include <memory>
 #include "fp.h"
 
+using namespace Functional::Type;
+

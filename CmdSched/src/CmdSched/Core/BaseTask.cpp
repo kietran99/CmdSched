@@ -3,11 +3,17 @@
 
 namespace CmdSched::Core
 {
-	BaseTask::BaseTask(const std::string& name, DateTime&& time)
+	BaseTask::BaseTask(const std::string& name, DateTime::DateTime&& time)
 		: name(name), time(std::move(time)) 
 	{
 		std::cout << "Constructing Task " << name << "...\n";
 	}
+
+	BaseTask::BaseTask(const std::string& name, DateTime::DateTime* time)	
+		: name(name), time(*time){}
+
+	BaseTask::BaseTask(std::string name, DateTime::DateTime&& time)
+		: name(name), time(std::move(time)) {}
 
 	BaseTask::BaseTask(const BaseTask& other)
 		: name(other.name), time(other.time)

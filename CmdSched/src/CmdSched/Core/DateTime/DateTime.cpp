@@ -1,7 +1,7 @@
 #include "cspch.h"
 #include "DateTime.h"
 
-namespace CmdSched::Core
+namespace CmdSched::Core::DateTime
 {	
 	DateTime::DateTime(int hour, int min, int day, int month, int year)
 		: hour(hour), min(min), day(day), month(month), year(year)
@@ -26,6 +26,16 @@ namespace CmdSched::Core
 		//std::cout << "Destroying Time...\n";
 	}
 	
+	Either<InvalidDateTimeError, DateTime* const> DateTime::TryConstruct(int hour, int min)
+	{
+		if (hour < 0 || hour > 23 || min < 0 || min > 59)
+		{
+			return InvalidDateTimeError();
+		}
+
+		return new DateTime(hour, min);
+	}
+
 	std::ostream& operator<<(std::ostream& os, const DateTime& time)
 	{
 		auto DateTimeFormat = [](const int& num) { return (num < 10 ? "0" : "") + std::to_string(num); };

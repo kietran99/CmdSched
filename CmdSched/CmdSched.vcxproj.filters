@@ -36,7 +36,13 @@
     <ClCompile Include="src\CmdSched\Commands\NoCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CmdSched\Core\DateTime.cpp">
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTimeDirector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +68,16 @@
     <ClInclude Include="src\CmdSched\Commands\NoCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CmdSched\Core\DateTime.h">
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTimeDirector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Core\DateTime\InvalidDateTimeError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

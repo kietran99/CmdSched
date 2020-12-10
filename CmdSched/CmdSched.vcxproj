@@ -94,6 +94,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTimeDirector.cpp" />
+    <ClCompile Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.cpp" />
     <ClCompile Include="src\CmdSched\Commands\NoCommand.cpp" />
     <ClCompile Include="src\CmdSched\Commands\CommandMux.cpp" />
     <ClCompile Include="src\CmdSched\Commands\AddTaskCommand.cpp" />
@@ -112,17 +114,20 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\CmdSched\Core\DateTime.cpp" />
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTime.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTimeDirector.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.h" />
     <ClInclude Include="src\CmdSched\Commands\NoCommand.h" />
     <ClInclude Include="src\CmdSched\Commands\CommandMux.h" />
     <ClInclude Include="src\CmdSched\Commands\AddTaskCommand.h" />
     <ClInclude Include="src\CmdSched\Commands\BaseCommand.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\InvalidDateTimeError.h" />
     <ClInclude Include="src\cspch.h" />
     <ClInclude Include="src\CmdSched\Core\BaseSchedule.h" />
     <ClInclude Include="src\CmdSched\Core\BaseTask.h" />
-    <ClInclude Include="src\CmdSched\Core\DateTime.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

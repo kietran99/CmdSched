@@ -2,6 +2,7 @@
 #include "BaseTask.h"
 #include "BaseSchedule.h"
 #include "CommandMux.h"
+#include "AddTaskCommand.h"
 
 using namespace CmdSched;
 
@@ -127,7 +128,7 @@ public:
 
 			if (input == "a")
 			{
-				schedule.AddTask(Core::BaseTask("Test 0", { 29, 1, 12, 5, 2020 }));
+				//schedule.AddTask(Core::BaseTask("Test 0", { 29, 1, 12, 5, 2020 }));
 				schedule.ShowAllTasks();
 			}
 		}
@@ -136,9 +137,9 @@ private:
 	std::vector<Core::BaseTask> CreateTestTasks()
 	{
 		std::vector<Core::BaseTask> res;
-		res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
+		/*res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
 		res.push_back(Core::BaseTask("Test 1", { 23, 44, 6, 12, 2020 }));
-		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));
+		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));*/
 		return res;
 	}
 
@@ -147,12 +148,22 @@ private:
 	//Commands::CommandMux cmdMux;
 };
 
+const std::unique_ptr<const B> Foo()
+{
+	return std::make_unique<B>(1);
+}
+
+void Boo(const std::unique_ptr<const B> p)
+{
+
+}
+
 int main()
 {
 	//Application app;
 	Core::BaseSchedule sched;
 	Commands::CommandMux cmdMux{&sched};
 	cmdMux.RequestCommand();
-	
+
 	//std::cin.get();
 }

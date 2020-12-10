@@ -62,33 +62,65 @@ namespace Functional
 	}
 	
 	namespace Type
-	{
-		template<class TL, class TR>
+	{	
+		template<class TError, class TSuccess>
 		class Either
 		{
 		public:
-			Either(const TL& left)
+			Either(const TError& left)
 				: maybe(left) {}
 
-			Either(const TR& right)
+			Either(const TSuccess& right)
 				: maybe(right) {}
 
-			Either& operator=(const Either& other) = delete;
-
-			void Match(void leftHandler(TL), void rightHandler(TR)) 
+			Either& operator=(const Either& other) = delete;			
+			
+			void Match(void leftHandler(TError), void rightHandler(TSuccess)) 
 			{
-				std::get_if<TL>(&maybe) ? 
-					leftHandler(std::get<TL>(maybe)) : rightHandler(std::get<TR>(maybe));
+				std::get_if<TError>(&maybe) ? 
+					leftHandler(std::get<TError>(maybe)) : rightHandler(std::get<TSuccess>(maybe));
 			}
 
 			template<class T>
-			T Match(T leftHandler(TL), T rightHandler(TR))
+			void Match(void errorHandler(TError, T), void successHandler(TSuccess, T), T state)
 			{
-				return std::get_if<TL>(&maybe) ?
-					leftHandler(std::get<TL>(maybe)) : rightHandler(std::get<TR>(maybe));
+				std::get_if<TError>(&maybe) ?
+					errorHandler(std::get<TError>(maybe), state) : successHandler(std::get<TSuccess>(maybe), state);
+			}
+
+			Either<TError, TSuccess> Match(Either<TError, TSuccess> errorHandler(TError), Either<TError, TSuccess> successHandler(TSuccess))
+			{
+				return std::get_if<TError>(&maybe) ?
+					errorHandler(std::get<TError>(maybe)) : successHandler(std::get<TSuccess>(maybe));
+			}
+
+			template<class T>
+			T Match(T errorHandler(TError), T successHandler(TSuccess))
+			{
+				return std::get_if<TError>(&maybe) ?
+					errorHandler(std::get<TError>(maybe)) : successHandler(std::get<TSuccess>(maybe));
+			}	
+
+			template<class T>
+			Either<TError, TSuccess> Map(TSuccess fn(TSuccess, T), T val)
+			{
+				return std::get_if<TError>(&maybe) ? std::get<TError>(maybe) 
+					: (Either<TError, TSuccess>)fn(std::get<TSuccess>(maybe), val);
+			}
+
+			template<class T>
+			Either<TError, TSuccess> Map(TSuccess fn(TSuccess, T), bool pred(T), T val)
+			{
+				if (!pred(val))
+				{
+					return TError();
+				}
+
+				return std::get_if<TError>(&maybe) ? std::get<TError>(maybe)
+					: (Either<TError, TSuccess>)fn(std::get<TSuccess>(maybe), val);
 			}
 		private:
-			std::variant<TL, TR> maybe;
+			std::variant<TError, TSuccess> maybe;
 		};
 	}
 }
