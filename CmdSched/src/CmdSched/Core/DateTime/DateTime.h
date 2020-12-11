@@ -12,6 +12,8 @@ namespace CmdSched::Core::DateTime
 		DateTime(int hour, int min, int day = 1, int month = 1, int year = 2020);		
 
 	public:
+		// For testing purpose only
+		//DateTime(Application int hour, int min, int day = 1, int month = 1, int year = 2020)
 		DateTime(const DateTime& other);
 		DateTime(DateTime&& other) noexcept;
 		~DateTime();
@@ -32,7 +34,7 @@ namespace CmdSched::Core::DateTime
 
 		static Either<InvalidDateTimeError, DateTime* const> TryConstruct(int hour, int min);		
 
-		friend class DefaultDateTimeBuilder;
+		
 		friend std::ostream& operator<<(std::ostream& os, const DateTime& time);
 
 	public:

@@ -99,7 +99,7 @@ class Application
 {
 public:
 	Application()
-		//: cmdMux (Commands::CommandMux(&schedule))
+		: cmdMux(&schedule)
 	{		
 		Start();
 		Update();
@@ -107,29 +107,22 @@ public:
 
 	void Start()
 	{
-		std::vector<Core::BaseTask> tasks = CreateTestTasks();
+		/*std::vector<Core::BaseTask> tasks = CreateTestTasks();
 		for (int i = 0; i < tasks.size(); i++)
 		{
 			schedule.AddTask(std::move(tasks[i]));
-		}
+		}*/
 		
 		schedule.ShowAllTasks();		
 	}
 
 	void Update()
 	{
-		std::string input;
+		bool isRunning = true;
 
-		while (true)
+		while (isRunning)
 		{
-			std::cout << "Enter a command: ";
-			std::cin >> input;
-
-			if (input == "a")
-			{
-				//schedule.AddTask(Core::BaseTask("Test 0", { 29, 1, 12, 5, 2020 }));
-				schedule.ShowAllTasks();
-			}
+			cmdMux.RequestCommand();
 		}
 	}
 private:
@@ -144,15 +137,12 @@ private:
 
 private:
 	Core::BaseSchedule schedule;
-	//Commands::CommandMux cmdMux;
+	Commands::CommandMux cmdMux;
 };
 
 int main()
 {
-	//Application app;
-	Core::BaseSchedule sched;
-	Commands::CommandMux cmdMux{&sched};
-	cmdMux.RequestCommand();
+	Application app;
 
 	std::cin.get();
 }

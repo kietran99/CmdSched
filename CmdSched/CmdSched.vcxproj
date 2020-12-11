@@ -94,6 +94,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CmdSched\Commands\ExitCommand.cpp" />
     <ClCompile Include="src\CmdSched\Core\DateTime\DateTimeDirector.cpp" />
     <ClCompile Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.cpp" />
     <ClCompile Include="src\CmdSched\Commands\NoCommand.cpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="src\CmdSched\Core\DateTime\DateTime.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\CmdSched\Commands\ExitCommand.h" />
     <ClInclude Include="src\CmdSched\Core\DateTime\DateTimeDirector.h" />
     <ClInclude Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.h" />
     <ClInclude Include="src\CmdSched\Commands\NoCommand.h" />

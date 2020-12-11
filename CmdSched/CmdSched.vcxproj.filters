@@ -45,6 +45,9 @@
     <ClCompile Include="src\CmdSched\Core\DateTime\DateTimeDirector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CmdSched\Commands\ExitCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CmdSched\Core\BaseTask.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CmdSched\Core\DateTime\InvalidDateTimeError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Commands\ExitCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "CommandMux.h"
 #include "NoCommand.h"
 #include "AddTaskCommand.h"
+#include "ExitCommand.h"
 #include <sstream>
 
 namespace CmdSched::Commands
@@ -33,7 +34,8 @@ namespace CmdSched::Commands
 
 		cmdDict =
 		{
-			{"add task", new AddTaskCommand()}
+			{"add task", new AddTaskCommand()},
+			{"exit", new ExitCommand()}
 		};
 	}
 
@@ -50,7 +52,6 @@ namespace CmdSched::Commands
 		std::string input;
 		std::getline(std::cin, input);
 		return std::stringstream(input);
-		//return std::stringstream();
 	}
 
 	BaseCommand*& CommandMux::ExtractCommand(std::stringstream& ss)
@@ -90,10 +91,8 @@ namespace CmdSched::Commands
 	{
 		std::vector<std::string> args;
 
-		//std::cout << "Args: " << std::endl;
 		for (std::string arg; ss >> arg;)
 		{
-			//std::cout << arg << std::endl;
 			args.push_back(arg);
 		}
 
