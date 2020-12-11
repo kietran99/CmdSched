@@ -2,7 +2,6 @@
 #include "BaseTask.h"
 #include "BaseSchedule.h"
 #include "CommandMux.h"
-#include "AddTaskCommand.h"
 
 using namespace CmdSched;
 
@@ -148,16 +147,6 @@ private:
 	//Commands::CommandMux cmdMux;
 };
 
-const std::unique_ptr<const B> Foo()
-{
-	return std::make_unique<B>(1);
-}
-
-void Boo(const std::unique_ptr<const B> p)
-{
-
-}
-
 int main()
 {
 	//Application app;
@@ -165,5 +154,5 @@ int main()
 	Commands::CommandMux cmdMux{&sched};
 	cmdMux.RequestCommand();
 
-	//std::cin.get();
+	std::cin.get();
 }

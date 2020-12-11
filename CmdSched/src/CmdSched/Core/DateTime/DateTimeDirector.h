@@ -1,20 +1,14 @@
 #pragma once
 
 #include "DateTime.h"
-#include "IDateTimeBuilder.h"
 
-namespace CmdSched::Core::DateTime
-{
-	class DateTimeDirector
-	{
-	public:
-		DateTimeDirector(IDateTimeBuilder* const& builder);
-		~DateTimeDirector();
-
-		//DateTime Build(int hour, int min);
-
-	private:
-		IDateTimeBuilder* builder;
-	};
+namespace CmdSched::Core::DateTime::Director
+{	
+	using MaybeDateTime = Functional::Type::Either<InvalidDateTimeError, DateTime* const>;
+	MaybeDateTime Build(const std::vector<std::string>& args);
+	MaybeDateTime BuildUsingHM(const std::vector<std::string>& args);
+	MaybeDateTime BuildUsingHMD(const std::vector<std::string>& args);
+	MaybeDateTime BuildUsingHMDM(const std::vector<std::string>& args);
+	MaybeDateTime BuildUsingHMDMY(const std::vector<std::string>& args);
 }
 

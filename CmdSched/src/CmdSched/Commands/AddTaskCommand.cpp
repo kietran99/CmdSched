@@ -1,6 +1,7 @@
 #include "cspch.h"
 #include "AddTaskCommand.h"
-#include "DateTime/DefaultDateTimeBuilder.h"
+#include "DateTime/DateTimeDirector.h"
+#include <algorithm>
 using namespace CmdSched::Core::DateTime;
 
 namespace CmdSched::Commands
@@ -20,23 +21,25 @@ namespace CmdSched::Commands
 		std::string taskName;
 	};
 
-	void AddTaskCommand::Execute(Core::BaseSchedule* const& schedule, const std::vector<std::string>& args)
-	{			
-		Either<InvalidDateTimeError, DateTime* const> maybeDateTime = Builder::Construct(stoi(args[1]), stoi(args[2]));
-		maybeDateTime.Map(Builder::SetDay, stoi(args[3]))			
-			.Match<CmdState>
-			([](InvalidDateTimeError err, CmdState) {},
-				[](DateTime* dateTime, CmdState state)
-				{
-					state.schedule->AddTask({ state.taskName, dateTime });
-					state.schedule->ShowAllTasks();
-				}, { schedule, args[0] }
-				);
-			
-		//builder->SetDay(stoi(args[3]));
-		//builder->SetMonth(stoi(args[4]));
-		//builder->SetYear(stoi(args[5]));		
+	std::vector<std::string> GetDateTimeArgs(const std::vector<std::string>& args)
+	{
+		std::vector<std::string> dtArgs(args.size() - 1);
+		std::copy(args.begin() + 1, args.end(), dtArgs.begin());
+		return dtArgs;
 	}
 
-	void Foo(const std::string& s) {}
+	void AddTaskCommand::Execute(Core::BaseSchedule* const& schedule, const std::vector<std::string>& args)
+	{		
+		const std::string& taskName = args[0];		
+		const std::vector<std::string>& dtArgs = GetDateTimeArgs(args);
+
+		auto maybeDateTime = Director::Build(dtArgs);
+		maybeDateTime.Match<CmdState>([](InvalidDateTimeError err, CmdState) {},
+			[](DateTime* const dateTime, CmdState state)
+			{
+				state.schedule->AddTask({ state.taskName, dateTime });
+				state.schedule->ShowAllTasks();
+			},
+			{ schedule, taskName });
+	}
 }

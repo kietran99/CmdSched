@@ -8,7 +8,7 @@ namespace CmdSched::Core::DateTime
 	class DateTime
 	{
 		//enum WeekDays { MON, TUE, WED, THU, FRI, SAT, SUN};
-	public:
+	private:
 		DateTime(int hour, int min, int day = 1, int month = 1, int year = 2020);		
 
 	public:

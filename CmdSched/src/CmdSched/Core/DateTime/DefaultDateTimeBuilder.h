@@ -2,11 +2,10 @@
 
 #include "DateTime.h"
 #include "InvalidDateTimeError.h"
-using namespace Functional::Type;
 
 namespace CmdSched::Core::DateTime::Builder
 {
-	Either<InvalidDateTimeError, DateTime* const> Construct(int hour, int min);
+	Functional::Type::Either<InvalidDateTimeError, DateTime* const> Construct(int hour, int min);
 
 	DateTime* const SetDay(DateTime* const dt, int day);
 
