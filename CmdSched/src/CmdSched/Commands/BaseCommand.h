@@ -2,7 +2,7 @@
 
 #include "BaseSchedule.h"
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	class BaseCommand
 	{

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <variant>
+#include <optional>
 
 namespace Functional
 {
@@ -121,6 +122,27 @@ namespace Functional
 			}
 		private:
 			std::variant<TError, TSuccess> maybe;
+		};
+
+		template<class TOptional>
+		class Optional
+		{
+		public:
+			Optional()
+				: opt(std::nullopt) {}
+
+			Optional(const TOptional& opt)
+				: opt(opt) {}
+
+			void Match(void optionalHandler(TOptional))
+			{
+				if (opt.has_value())
+				{
+					optionalHandler(opt.value());
+				}
+			}
+		private:
+			std::optional<TOptional> opt;
 		};
 	}
 }

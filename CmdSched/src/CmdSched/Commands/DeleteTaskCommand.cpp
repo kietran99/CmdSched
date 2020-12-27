@@ -1,7 +1,7 @@
 #include "cspch.h"
 #include "DeleteTaskCommand.h"
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	bool DeleteTaskCommand::IsExecutable(size_t nArgs)
 	{
@@ -10,11 +10,20 @@ namespace CmdSched::Commands
 
 	void DeleteTaskCommand::Execute(Core::BaseSchedule* const& schedule, const std::vector<std::string>& args)
 	{
-		std::optional<std::out_of_range> err = schedule->DeleteTask(stoi(args[1]));
-		if (err.has_value())
+		if (args[0] == "i")
 		{
-			printf("Error: %s\n", err.value().what());
+			Functional::Type::Optional<std::out_of_range> result = schedule->DeleteTask(stoi(args[1]));
+			result.Match([](std::out_of_range err) { printf("Error: %s\n", err.what()); });
+			return;
 		}
-		schedule->ShowAllTasks();
+		
+		if (args[0] == "n")
+		{
+			Functional::Type::Optional<Error::InvalidTaskName> result = schedule->DeleteTask(args[1]);
+			result.Match([](Error::InvalidTaskName err) { std::cout << err.GetMessage() << std::endl; });
+			return;
+		}
+
+		printf("Error: Invalid Command\n");
 	}
 }

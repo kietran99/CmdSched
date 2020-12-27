@@ -3,10 +3,11 @@
 #include "NoCommand.h"
 #include "AddTaskCommand.h"
 #include "DeleteTaskCommand.h"
+#include "ShowAllTaskCommand.h"
 #include "ExitCommand.h"
 #include <sstream>
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	CommandMux::CommandMux(Core::BaseSchedule* const& schedule)
 		: schedule(schedule)
@@ -37,6 +38,7 @@ namespace CmdSched::Commands
 		{
 			{"add task", new AddTaskCommand()},
 			{"del task", new DeleteTaskCommand()},
+			{"show task all", new ShowAllTaskCommand()},
 			{"exit", new ExitCommand()}
 		};
 	}

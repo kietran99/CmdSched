@@ -4,7 +4,7 @@
 #include "BaseCommand.h"
 #include <unordered_map>
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	class CommandMux
 	{

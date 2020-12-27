@@ -44,6 +44,11 @@ namespace CmdSched::Core
 
 		return *this;
 	}
+
+	std::string BaseTask::GetName()
+	{
+		return name;
+	}
 	
 	std::ostream& operator<<(std::ostream& os, const BaseTask& task)
 	{		

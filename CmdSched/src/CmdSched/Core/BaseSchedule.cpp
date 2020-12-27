@@ -44,12 +44,20 @@ namespace CmdSched::Core
 		tasks.push_back(std::move(task));
 	}
 
-	std::optional<std::out_of_range> BaseSchedule::DeleteTask(const std::string& name)
+	Functional::Type::Optional<CmdSched::Command::Error::InvalidTaskName> BaseSchedule::DeleteTask(const std::string& name)
 	{
-		return {};
+		for (size_t i = 0, size = tasks.size(); i < size; i++)
+		{
+			if (tasks[i].GetName() != name) continue;
+
+			tasks.erase(tasks.begin() + i);
+			return {};
+		}
+
+		return CmdSched::Command::Error::InvalidTaskName();
 	}
 
-	std::optional<std::out_of_range> BaseSchedule::DeleteTask(const int& idx)
+	Functional::Type::Optional<std::out_of_range> BaseSchedule::DeleteTask(const int& idx)
 	{
 		if (tasks.empty() || idx > tasks.size() - 1)
 		{

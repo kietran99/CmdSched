@@ -17,6 +17,8 @@ namespace CmdSched::Core
 
 		friend std::ostream& operator<<(std::ostream& os, const BaseTask& task);
 		BaseTask& operator=(BaseTask&& other) noexcept;
+
+		std::string GetName();
 	private:
 		std::string name;
 		DateTime::DateTime dateTime;

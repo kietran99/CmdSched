@@ -51,6 +51,12 @@
     <ClCompile Include="src\CmdSched\Commands\DeleteTaskCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CmdSched\Commands\Errors\InvalidTaskName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CmdSched\Commands\ShowAllTaskCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CmdSched\Core\BaseTask.h">
@@ -90,6 +96,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CmdSched\Commands\DeleteTaskCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Commands\Errors\InvalidTaskName.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Commands\Errors\IError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdSched\Commands\ShowAllTaskCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

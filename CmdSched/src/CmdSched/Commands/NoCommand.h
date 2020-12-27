@@ -2,7 +2,7 @@
 
 #include "BaseCommand.h"
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	class NoCommand : public BaseCommand
 	{

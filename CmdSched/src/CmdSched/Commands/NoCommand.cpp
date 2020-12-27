@@ -1,7 +1,7 @@
 #include "cspch.h"
 #include "NoCommand.h"
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	NoCommand::NoCommand() {}
 

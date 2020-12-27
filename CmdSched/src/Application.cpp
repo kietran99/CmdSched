@@ -138,7 +138,7 @@ private:
 
 private:
 	Core::BaseSchedule schedule;
-	Commands::CommandMux cmdMux;
+	Command::CommandMux cmdMux;
 };
 
 int main()

@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace CmdSched::Core::DateTime;
 
-namespace CmdSched::Commands
+namespace CmdSched::Command
 {
 	AddTaskCommand::~AddTaskCommand()
 	{

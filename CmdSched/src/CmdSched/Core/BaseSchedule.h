@@ -2,9 +2,9 @@
 
 #include "cspch.h"
 #include "BaseTask.h"
+#include "Errors/InvalidTaskName.h"
 
 #include <optional>
-
 
 namespace CmdSched::Core
 {
@@ -16,8 +16,8 @@ namespace CmdSched::Core
 		~BaseSchedule();
 
 		void AddTask(BaseTask&& task);
-		std::optional<std::out_of_range> DeleteTask(const std::string& name);
-		std::optional<std::out_of_range> DeleteTask(const int& idx);
+		Functional::Type::Optional<CmdSched::Command::Error::InvalidTaskName> DeleteTask(const std::string& name);
+		Functional::Type::Optional<std::out_of_range> DeleteTask(const int& idx);
 		//bool UpdateTask();
 		void ShowAllTasks();
 		void FilterTasks();
