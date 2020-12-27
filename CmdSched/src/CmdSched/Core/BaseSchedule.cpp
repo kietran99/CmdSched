@@ -38,11 +38,26 @@ namespace CmdSched::Core
 		}*/
 	}
 
-	bool BaseSchedule::AddTask(BaseTask&& task)
+	void BaseSchedule::AddTask(BaseTask&& task)
 	{
 		//printf("Add Task\n");
 		tasks.push_back(std::move(task));
-		return true;
+	}
+
+	std::optional<std::out_of_range> BaseSchedule::DeleteTask(const std::string& name)
+	{
+		return {};
+	}
+
+	std::optional<std::out_of_range> BaseSchedule::DeleteTask(const int& idx)
+	{
+		if (tasks.empty() || idx > tasks.size() - 1)
+		{
+			return std::out_of_range("Index out of range");
+		}
+
+		tasks.erase(tasks.begin() + idx);
+		return {};
 	}
 
 	/*void ShowTaskInfo(const BaseTask& task)

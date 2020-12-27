@@ -4,13 +4,12 @@
 
 namespace CmdSched::Commands
 {
-	class ExitCommand : public BaseCommand
+	class DeleteTaskCommand : public BaseCommand
 	{
 	public:
-		//static const std::string cmdName = "exit";
+		//static const std::string cmdName = "del task";
 
-		virtual bool IsExecutable(size_t nArgs) override { return nArgs == 0; }
-
+		virtual bool IsExecutable(size_t nArgs) override;
 		virtual void Execute(Core::BaseSchedule* const& schedule, const std::vector<std::string>& args) override;
 	};
 }

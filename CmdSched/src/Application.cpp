@@ -107,11 +107,11 @@ public:
 
 	void Start()
 	{
-		/*std::vector<Core::BaseTask> tasks = CreateTestTasks();
+		std::vector<Core::BaseTask> tasks = CreateTestTasks();
 		for (int i = 0; i < tasks.size(); i++)
 		{
 			schedule.AddTask(std::move(tasks[i]));
-		}*/
+		}
 		
 		schedule.ShowAllTasks();		
 	}
@@ -129,9 +129,10 @@ private:
 	std::vector<Core::BaseTask> CreateTestTasks()
 	{
 		std::vector<Core::BaseTask> res;
-		/*res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
+		Core::BaseTask task{ "Test", { 1, 29, 5, 12, 2020 } };
+		res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
 		res.push_back(Core::BaseTask("Test 1", { 23, 44, 6, 12, 2020 }));
-		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));*/
+		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));
 		return res;
 	}
 

@@ -2,6 +2,7 @@
 #include "CommandMux.h"
 #include "NoCommand.h"
 #include "AddTaskCommand.h"
+#include "DeleteTaskCommand.h"
 #include "ExitCommand.h"
 #include <sstream>
 
@@ -30,11 +31,12 @@ namespace CmdSched::Commands
 
 	void CommandMux::InitializeAllCommands()
 	{
-		printf("Initializing All Commands...\n");
+		printf("Initializing Commands...\n");
 
 		cmdDict =
 		{
 			{"add task", new AddTaskCommand()},
+			{"del task", new DeleteTaskCommand()},
 			{"exit", new ExitCommand()}
 		};
 	}

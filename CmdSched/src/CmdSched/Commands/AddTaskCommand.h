@@ -6,6 +6,8 @@ namespace CmdSched::Commands
 {
 	class AddTaskCommand : public BaseCommand
 	{
+	//public:
+		//static std::string cmdName = "add task";
 	public:
 		virtual ~AddTaskCommand();
 

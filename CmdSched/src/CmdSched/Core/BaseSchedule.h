@@ -1,7 +1,10 @@
 #pragma once
 
 #include "cspch.h"
-#include <BaseTask.h>
+#include "BaseTask.h"
+
+#include <optional>
+
 
 namespace CmdSched::Core
 {
@@ -12,9 +15,9 @@ namespace CmdSched::Core
 		BaseSchedule(std::vector<BaseTask>&& tasks);
 		~BaseSchedule();
 
-		bool AddTask(BaseTask&& task);
-		//bool RemoveTask(std::string name);
-		//bool RemoveTask(int idx);
+		void AddTask(BaseTask&& task);
+		std::optional<std::out_of_range> DeleteTask(const std::string& name);
+		std::optional<std::out_of_range> DeleteTask(const int& idx);
 		//bool UpdateTask();
 		void ShowAllTasks();
 		void FilterTasks();
