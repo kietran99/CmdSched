@@ -1,13 +1,20 @@
 #include "cspch.h"
-#include "BaseTask.h"
-#include "BaseSchedule.h"
-#include "CommandMux.h"
 
-using namespace CmdSched;
+//#include "BaseTask.h"
+//#include "BaseSchedule.h"
+//#include "CommandMux.h"
+
+//#include "task.h"
+//#include "input-reader.h"
+#include "schedule.h"
+#include "command-executor.h"
+
+//using namespace CmdSched;
 
 class B
 {
 public:	
+	B() : y(1) {}
 
 	B(int y) : y(y)
 	{
@@ -95,55 +102,66 @@ private:
 	std::vector<B> vect;
 };
 
-class Application
-{
-public:
-	Application()
-		: cmdMux(&schedule)
-	{		
-		Start();
-		Update();
-	}
-
-	void Start()
-	{
-		std::vector<Core::BaseTask> tasks = CreateTestTasks();
-		for (int i = 0; i < tasks.size(); i++)
-		{
-			schedule.AddTask(std::move(tasks[i]));
-		}
-		
-		schedule.ShowAllTasks();		
-	}
-
-	void Update()
-	{
-		bool isRunning = true;
-
-		while (isRunning)
-		{
-			cmdMux.RequestCommand();
-		}
-	}
-private:
-	std::vector<Core::BaseTask> CreateTestTasks()
-	{
-		std::vector<Core::BaseTask> res;
-		Core::BaseTask task{ "Test", { 1, 29, 5, 12, 2020 } };
-		res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
-		res.push_back(Core::BaseTask("Test 1", { 23, 44, 6, 12, 2020 }));
-		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));
-		return res;
-	}
-
-private:
-	Core::BaseSchedule schedule;
-	Command::CommandMux cmdMux;
-};
+//class Application
+//{
+//public:
+//	Application()
+//		: cmdMux(&schedule)
+//	{		
+//		Start();
+//		Update();
+//	}
+//
+//	void Start()
+//	{
+//		std::vector<Core::BaseTask> tasks = CreateTestTasks();
+//		for (int i = 0; i < tasks.size(); i++)
+//		{
+//			schedule.AddTask(std::move(tasks[i]));
+//		}
+//		
+//		schedule.ShowAllTasks();		
+//	}
+//
+//	void Update()
+//	{
+//		bool isRunning = true;
+//
+//		while (isRunning)
+//		{
+//			cmdMux.RequestCommand();
+//		}
+//	}
+//private:
+//	std::vector<Core::BaseTask> CreateTestTasks()
+//	{
+//		std::vector<Core::BaseTask> res;
+//		Core::BaseTask task{ "Test", { 1, 29, 5, 12, 2020 } };
+//		res.push_back(Core::BaseTask("Test 0", { 1, 29, 5, 12, 2020 }));
+//		res.push_back(Core::BaseTask("Test 1", { 23, 44, 6, 12, 2020 }));
+//		res.push_back(Core::BaseTask("Test 2", { 14, 23, 8, 12, 2020 }));
+//		return res;
+//	}
+//
+//private:
+//	Core::BaseSchedule schedule;
+//	Command::CommandMux cmdMux;
+//};
 
 int main()
 {
-	Application app;
-
-	std::cin.get();
+	//Application app;
+	/*auto maybeCommandData = Command::ReadInput(std::cin);
+	maybeCommandData
+		.Match(
+			[](auto err) { std::cout << err.msg; },
+			[](auto cmdData) { std::cout << cmdData; }
+	);*/
+	Core::Schedule schedule{};
+	Command::Add(schedule, { "Clean the House", "15", "02", "2021" });
+	Command::Show(schedule, {});
+	Command::Add(schedule, { "Write some Code", "20", "04", "2021" });
+	Command::Show(schedule, {});
+	Command::Add(schedule, { "Eat Chocolate", "29", "02", "2024" });
+	Command::Show(schedule, {});
 }

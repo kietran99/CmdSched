@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -62,7 +62,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>src;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\FCSched\Command;src\FCSched\Core;;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,7 +82,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>src;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\FCSched\Command;src\FCSched\Core;;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +119,11 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\CmdSched\Core\DateTime\DateTime.cpp" />
+    <ClCompile Include="src\FCSched\Command\action-validator-impl.cpp" />
+    <ClCompile Include="src\FCSched\Command\command-executor-impl.cpp" />
+    <ClCompile Include="src\FCSched\Command\input-reader-impl.cpp" />
+    <ClCompile Include="src\FCSched\Core\schedule-impl.cpp" />
+    <ClCompile Include="src\logger-impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CmdSched\Commands\ShowAllTaskCommand.h" />
@@ -137,6 +142,14 @@
     <ClInclude Include="src\CmdSched\Core\BaseSchedule.h" />
     <ClInclude Include="src\CmdSched\Core\BaseTask.h" />
     <ClInclude Include="src\CmdSched\Core\DateTime\DateTime.h" />
+    <ClInclude Include="src\FCSched\Command\action-validator.h" />
+    <ClInclude Include="src\FCSched\Command\command-data.h" />
+    <ClInclude Include="src\FCSched\Command\command-executor.h" />
+    <ClInclude Include="src\FCSched\Command\input-reader.h" />
+    <ClInclude Include="src\logger.h" />
+    <ClInclude Include="src\FCSched\Core\schedule.h" />
+    <ClInclude Include="src\FCSched\Core\task.h" />
+    <ClInclude Include="src\fcsched-errors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
