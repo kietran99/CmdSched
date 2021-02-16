@@ -2,12 +2,12 @@
 
 #include "command-executor.h"
 
-#include <optional>
-
 namespace Command
 {
 	//-------------------INTERNAL DECLARTIONS-----------------------------
 	bool MatchNumberArgs(ArgValues values, int nArgs);
+	bool MatchNumberArgsWithNaming(ArgValues values, int nArgs);
+	std::string MakeNameFromArgVals(ArgValues values, int toEndIdx);
 	std::optional<const unsigned short> StrToUShort(const std::string& s);
 	bool IsValidMonth(u_short month);
 	bool IsValidYear(u_short year);
@@ -15,6 +15,14 @@ namespace Command
 	bool IsInValidRange(u_short val, u_short min, u_short max);
 	//--------------------------------------------------------------------
 
+
+	bool Execute(
+		std::function<bool(Core::Schedule& schedule, std::vector<std::string>)> fn, 
+		Core::Schedule& schedule, 
+		ArgValues values)
+	{
+		return fn(schedule, values);
+	}
 
 	bool Show(Core::Schedule& schedule, ArgValues values)
 	{
@@ -27,14 +35,27 @@ namespace Command
 		return true;
 	}
 
-	bool Add(Core::Schedule& schedule, const std::vector<std::string> values)
+	bool Exit(Core::Schedule& schedule, ArgValues values)
 	{
-		if (!MatchNumberArgs(values, 4))
+		exit(0);
+		return true;
+	}
+
+	bool Refresh(Core::Schedule& schedule, ArgValues values)
+	{
+		return true;
+	}
+
+	bool Add(Core::Schedule& schedule, ArgValues values)
+	{
+		if (!MatchNumberArgsWithNaming(values, 4))
 		{
 			return false;
 		}
 
-		auto maybeDay = StrToUShort(values[1]), maybeMonth = StrToUShort(values[2]), maybeYear = StrToUShort(values[3]);
+		auto maybeDay = StrToUShort(values[values.size() - 3]), 
+			maybeMonth = StrToUShort(values[values.size() - 2]),
+			maybeYear = StrToUShort(values[values.size() - 1]);
 
 		if (!maybeDay || !maybeMonth || !maybeYear)
 		{
@@ -62,7 +83,7 @@ namespace Command
 			return false;
 		}
 
-		schedule.AddTask({ values[0], day, month, year });
+		schedule.AddTask({ MakeNameFromArgVals(values, 3), day, month, year });
 		LogSuccess("Added Task");
 		return true;
 	}
@@ -106,17 +127,19 @@ namespace Command
 	}
 
 	bool IsValidMonth(u_short month) { return IsInValidRange(month, 1, 12); }
+	
 	bool IsValidYear(u_short year) { return IsInValidRange(year, 2021, 3000); }
+	
 	bool IsInValidRange(u_short val, u_short min, u_short max) { return val <= max && val >= min; }
 
-	bool RemoveName(Core::Schedule& schedule, const std::vector<std::string> values)
+	bool RemoveName(Core::Schedule& schedule, ArgValues values)
 	{
-		if (!MatchNumberArgs(values, 1))
+		if (!MatchNumberArgsWithNaming(values, 1))
 		{
 			return false;
 		}
 
-		if (!schedule.RemoveName(values[0]))
+		if (!schedule.RemoveName(MakeNameFromArgVals(values, 0)))
 		{
 			LogWarning("No Task with corresponding name was found");
 			return false;
@@ -126,7 +149,7 @@ namespace Command
 		return true;
 	}
 
-	bool RemoveAt(Core::Schedule& schedule, const std::vector<std::string> values)
+	bool RemoveAt(Core::Schedule& schedule, ArgValues values)
 	{
 		if (!MatchNumberArgs(values, 1))
 		{
@@ -160,5 +183,28 @@ namespace Command
 		}
 
 		return true;
+	}
+	
+	bool MatchNumberArgsWithNaming(ArgValues values, int nArgs)
+	{
+		if (values.size() < nArgs)
+		{
+			LogError("Number of Arguments does not match!");
+			return false;
+		}
+
+		return true;
+	}
+
+	std::string MakeNameFromArgVals(ArgValues values, int toEndIdx)
+	{
+		std::string name = "";
+
+		for (size_t i = 0, lastIdx = values.size() - toEndIdx; i < lastIdx; i++)
+		{
+			name.append(values[i] + (i != lastIdx ? " " : ""));
+		}
+
+		return name;
 	}
 }

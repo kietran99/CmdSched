@@ -4,34 +4,101 @@
 
 #include <sstream>
 #include <algorithm>
+#include <tuple>
+#include <variant>
 
 namespace Command
 {
 	//-----------------------Internal Declarations------------------------------
 	ArgList ExtractArgsFromInput(std::istream& input);
 	ArgList PopulateArgList(ArgList argList, std::stringstream& ss, const int remainingArgCnt);
-	const Either<InvalidCommandError, CommandData> ResolveInput(const ArgList& args);
+	const std::variant<InvalidCommandError, CommandData> ResolveInput(const ArgList& args);
+	std::optional
+		<std::tuple
+		<std::function<bool(Core::Schedule&, const std::vector<std::string>)>, int>>
+		TryExtractValidAction(const ArgList& args);
+	std::optional
+		<std::tuple
+		<std::function<bool(Core::Schedule&, const std::vector<std::string>)>, int>>
+		TryExtractSingleArgValidAction(const std::string& arg);
 	//-----------------------------------------------------------------
 
 
 
-	const Either<InvalidCommandError, CommandData> ReadInput(std::istream& input)
+	const std::variant<InvalidCommandError, CommandData> ReadInput(std::istream& input)
 	{
 		return ResolveInput(ExtractArgsFromInput(input));
 	}
 
-	const Either<InvalidCommandError, CommandData> ResolveInput(const ArgList& args)
+	const std::variant<InvalidCommandError, CommandData> ResolveInput(const ArgList& args)
 	{
-		std::string action = args[0];
+		auto maybeExecutorAndIdx = TryExtractValidAction(args);
 
-		if (!IsValidAction(action))
+		if (!maybeExecutorAndIdx.has_value())
 		{
-			return Either<InvalidCommandError, CommandData>(InvalidCommandError());
+			return InvalidCommandError();
 		}
 
-		std::vector<std::string> values(args.size() - 1);
-		std::copy(args.begin() + 1, args.end(), values.begin());
-		return Either<InvalidCommandError, CommandData>(CommandData(action, values));
+		auto&[executor, valuesStartIdx] = *maybeExecutorAndIdx;
+		auto valueListSize = args.size() - valuesStartIdx;
+		
+		if (valueListSize == 0)
+		{
+			return CommandData(executor, {});
+		}
+
+		std::vector<std::string> values(valueListSize);
+		std::copy(args.begin() + valuesStartIdx, args.end(), values.begin());
+		return CommandData(executor, values);
+	}
+
+	std::optional
+		<std::tuple
+		<std::function<bool(Core::Schedule&, const std::vector<std::string>)>, int>> 
+		TryExtractValidAction(const ArgList& args)
+	{
+		if (args.size() == 0)
+		{
+			return std::make_tuple(Command::Refresh, 0);
+		}
+
+		if (args.size() == 1)
+		{
+			return TryExtractSingleArgValidAction(args[0]);
+		}
+
+		std::string tryMatchActionStr = "";
+
+		for (int i = 0; i < args.size(); i++)
+		{
+			tryMatchActionStr.append(args[i]);
+			
+			auto executor = TryGetAction(tryMatchActionStr);
+
+			if (executor)
+			{
+				return std::make_tuple(*executor, i + 1);
+			}
+
+			tryMatchActionStr.append((i < args.size() - 1 ? " " : ""));
+		}
+
+		return std::nullopt;
+	}
+
+	std::optional
+		<std::tuple
+		<std::function<bool(Core::Schedule&, const std::vector<std::string>)>, int>> 
+		TryExtractSingleArgValidAction(const std::string& arg)
+	{
+		auto executor = TryGetAction(arg);
+
+		if (executor)
+		{
+			return std::make_tuple(*executor, 1);
+		}
+
+		return std::nullopt;
 	}
 
 	ArgList ExtractArgsFromInput(std::istream& input)

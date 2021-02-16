@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <optional>
+#include <functional>
 
 #include "logger.h"
 #include "fp.h"

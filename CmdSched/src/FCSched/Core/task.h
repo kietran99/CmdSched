@@ -11,18 +11,18 @@ namespace Core
 
 		Task(std::string name, u_short day, u_short month, u_short year)
 			: name(name), day(day), month(month), year(year) {
-			printf("Task - Created: %s\n", name.c_str());
+			//printf("Task - Created: %s\n", name.c_str());
 		}
 
 		Task(const Task& that)
 			: name(that.name), day(that.day), month(that.month), year(that.year) {
-			printf("Task - Copied: %s\n", name.c_str());
+			//printf("Task - Copied: %s\n", name.c_str());
 		}
 
 		Task(Task&& that) noexcept
 			: name(that.name), day(that.day), month(that.month), year(that.year) 
 		{
-			printf("Task - Moved: %s\n", name.c_str());
+			//printf("Task - Moved: %s\n", name.c_str());
 			that.name.clear();
 			that.day = 0;
 			that.month = 0;
@@ -31,7 +31,7 @@ namespace Core
 
 		Task& operator=(Task&& that) noexcept
 		{
-			printf("Task - Moved: %s\n", name.c_str());
+			//printf("Task - Moved: %s\n", name.c_str());
 			
 			if (this != &that)
 			{
@@ -50,7 +50,7 @@ namespace Core
 			return *this;
 		}
 
-		~Task() { printf("Task - Destroyed: %s\n", name.empty() ? "EMPTY" : name.c_str()); }
+		//~Task() { printf("Task - Destroyed: %s\n", name.empty() ? "EMPTY" : name.c_str()); }
 
 		void Log() const
 		{

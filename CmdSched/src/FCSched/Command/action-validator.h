@@ -2,11 +2,11 @@
 
 #include "cspch.h"
 
-#include <unordered_set>
-
 #include "command-executor.h"
 
 namespace Command
 {
-	bool IsValidAction(const std::string& action);
+	std::optional<
+		std::function<bool(Core::Schedule&, const std::vector<std::string>)>>
+		TryGetAction(const std::string& actionAsStr);
 }
