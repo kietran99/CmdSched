@@ -1,3 +1,13 @@
+.vs/
+*.idb
+*.pdb
+*.tlog
+*.ilk
+*.log
+*.obj.enc
+*.exe.recipe
+*.vcxproj.FileListAbsolute.txt
+
 # Prerequisites
 *.d
 

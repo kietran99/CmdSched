@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{66a6c876-371e-42bf-becb-3bc4ce5e201b}</ProjectGuid>
+    <RootNamespace>CmdSched</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(ProjectDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(ProjectDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>src;src\FCSched\Command;src\FCSched\Core;;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)vendor\hof\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>cspch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>src;src\FCSched\Command;src\FCSched\Core;;src\CmdSched\Core;src\CmdSched\Commands;$(SolutionDir)vendor\hof\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)vendor\hof\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hof.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CmdSched\Commands\ShowAllTaskCommand.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\Errors\InvalidTaskName.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\DeleteTaskCommand.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\ExitCommand.cpp" />
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTimeDirector.cpp" />
+    <ClCompile Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\NoCommand.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\CommandMux.cpp" />
+    <ClCompile Include="src\CmdSched\Commands\AddTaskCommand.cpp" />
+    <ClCompile Include="src\cspch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\CmdSched\Core\BaseSchedule.cpp" />
+    <ClCompile Include="src\CmdSched\Core\BaseTask.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cspch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cspch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\CmdSched\Core\DateTime\DateTime.cpp" />
+    <ClCompile Include="src\FCSched\Command\action-validator-impl.cpp" />
+    <ClCompile Include="src\FCSched\Command\command-executor-impl.cpp" />
+    <ClCompile Include="src\FCSched\Command\input-reader-impl.cpp" />
+    <ClCompile Include="src\FCSched\Core\schedule-impl.cpp" />
+    <ClCompile Include="src\logger-impl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CmdSched\Commands\ShowAllTaskCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\Errors\IError.h" />
+    <ClInclude Include="src\CmdSched\Commands\Errors\InvalidTaskName.h" />
+    <ClInclude Include="src\CmdSched\Commands\DeleteTaskCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\ExitCommand.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTimeDirector.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\DefaultDateTimeBuilder.h" />
+    <ClInclude Include="src\CmdSched\Commands\NoCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\CommandMux.h" />
+    <ClInclude Include="src\CmdSched\Commands\AddTaskCommand.h" />
+    <ClInclude Include="src\CmdSched\Commands\BaseCommand.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\InvalidDateTimeError.h" />
+    <ClInclude Include="src\cspch.h" />
+    <ClInclude Include="src\CmdSched\Core\BaseSchedule.h" />
+    <ClInclude Include="src\CmdSched\Core\BaseTask.h" />
+    <ClInclude Include="src\CmdSched\Core\DateTime\DateTime.h" />
+    <ClInclude Include="src\FCSched\Command\action-validator.h" />
+    <ClInclude Include="src\FCSched\Command\command-data.h" />
+    <ClInclude Include="src\FCSched\Command\command-executor.h" />
+    <ClInclude Include="src\FCSched\Command\input-reader.h" />
+    <ClInclude Include="src\logger.h" />
+    <ClInclude Include="src\FCSched\Core\schedule.h" />
+    <ClInclude Include="src\FCSched\Core\task.h" />
+    <ClInclude Include="src\fcsched-errors.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
